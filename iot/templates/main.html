@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="kr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>HomeIOT</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://kr.objectstorage.ncloud.com/uhmtoto-homemanager/main.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron mt-3">
+            {% if main %}
+            <h1>HomeIOT</h1>
+            {% elif device not in device_list or room not in room_list %}
+            <h1>Not Found</h1>
+            {% else %}
+            <h1>{{ device + '_' + room }}</h1>
+            <p id="now_data">loading...</p>
+            <div class="btn-toolbar mr-2" role="toolbar">                    
+                <div class="input-group">
+                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                        {% if device != 'gas' %}
+                        <button type="button" class="btn btn-secondary set" id="btn-on" data="on" role="button" href="#">on</button>
+                        {% endif %}
+                        <button type="button" class="btn btn-secondary set" id="btn-off" data="off" role="button" href="#">off</button>
+                    </div>
+
+                    {% if device == 'heating' %}
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Temp</span>
+                        </div>
+                        <input type="number" id="temp" class="form-control" min="5" max="40">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary temp-set" type="button" id="button-set">set</button>
+                        </div>
+                    </div> 
+                    {% endif %}
+
+                    {% if device == 'ventilation' %}
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-secondary set wind-p" data="1">33%</button>
+                        <button type="button" class="btn btn-secondary set wind-p" data="2">66%</button>
+                        <button type="button" class="btn btn-secondary set wind-p" data="3">100%</button>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+			{% endif %}
+        </div>
+    </div>
+    <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Menu</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="/gas/kitchen/">Gas</a>
+				</li>
+                <li class="nav-item dropup">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown-l" aria-haspopup="true" aria-expanded="false">Light</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown-l">
+                        <a class="dropdown-item" href="/light/living1/">Living Room 1</a>
+                        <a class="dropdown-item" href="/light/living2/">Living Room 2</a>
+                        <a class="dropdown-item" href="/light/hallway/">Hallway</a>
+                    </div>
+                </li>
+                <li class="nav-item dropup">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown-h" aria-haspopup="true" aria-expanded="false">Heating</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown-h">
+                        <a class="dropdown-item" href="/heating/living/">Living Room</a>
+                        <a class="dropdown-item" href="/heating/bed/">Bed Room</a>
+                        <a class="dropdown-item" href="/heating/seohun/">Seohun's Room</a>
+                        <a class="dropdown-item" href="/heating/seojin/">Seojin's Room</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/ventilation/all/">Ventilation</a>
+                </li>
+                <li class="nav-item dropup">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown-h" aria-haspopup="true" aria-expanded="false">Schedule</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown-h">
+                        <a class="dropdown-item" href="/schedule/living/">Living Room</a>
+                        <a class="dropdown-item" href="/schedule/bed/">Bed Room</a>
+                        <a class="dropdown-item" href="/schedule/seohun/">Seohun's Room</a>
+                        <a class="dropdown-item" href="/schedule/seojin/">Seojin's Room</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://kr.objectstorage.ncloud.com/uhmtoto-homemanager/request.js"></script>
+    <script src="https://kr.objectstorage.ncloud.com/uhmtoto-homemanager/update.js"></script>
+    <script>
+        update();
+    </script>
+</body>
+
+</html>
