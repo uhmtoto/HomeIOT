@@ -44,48 +44,8 @@
 			{% endif %}
         </div>
     </div>
-    <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">Menu</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-				<li class="nav-item">
-					<a class="nav-link" href="/gas/kitchen/">Gas</a>
-				</li>
-                <li class="nav-item dropup">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown-l" aria-haspopup="true" aria-expanded="false">Light</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown-l">
-                        <a class="dropdown-item" href="/light/living1/">Living Room 1</a>
-                        <a class="dropdown-item" href="/light/living2/">Living Room 2</a>
-                        <a class="dropdown-item" href="/light/hallway/">Hallway</a>
-                    </div>
-                </li>
-                <li class="nav-item dropup">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown-h" aria-haspopup="true" aria-expanded="false">Heating</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown-h">
-                        <a class="dropdown-item" href="/heating/living/">Living Room</a>
-                        <a class="dropdown-item" href="/heating/bed/">Bed Room</a>
-                        <a class="dropdown-item" href="/heating/seohun/">Seohun's Room</a>
-                        <a class="dropdown-item" href="/heating/seojin/">Seojin's Room</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/ventilation/all/">Ventilation</a>
-                </li>
-                <li class="nav-item dropup">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown-h" aria-haspopup="true" aria-expanded="false">Schedule</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown-h">
-                        <a class="dropdown-item" href="/schedule/living/">Living Room</a>
-                        <a class="dropdown-item" href="/schedule/bed/">Bed Room</a>
-                        <a class="dropdown-item" href="/schedule/seohun/">Seohun's Room</a>
-                        <a class="dropdown-item" href="/schedule/seojin/">Seojin's Room</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    
+    {% include 'navbar.html' %}
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
