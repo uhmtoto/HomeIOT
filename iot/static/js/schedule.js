@@ -11,19 +11,33 @@ $(document).ready(function() {
     });
 
     $("#set").click(function() {
-        var time = $("#s_time").val();
+        var _time = $("#s_time").val();
         var io = $("#btn-on").attr("disabled") ? 'i' : 'o';
-        var temp = $("#s_temp").val();
+        var _temp = $("#s_temp").val();
         if (io == 'o') {
-            temp = '5';
+            _temp = '0';
         }
-        $.get('./'+time+'/'+io+'/'+temp, function(data, status) {
-            if (data == 'ok') {
-                alert('scheduled successfully');
-            }
-            else {
-                alert(data);
-            }
-        });
+        //validate temp
+        if (_temp < 5 || _temp > 40) {
+            alert('err');
+        }
+        //validate time
+        else if (_time / 100 < 0 || _time / 100 > 24 || _time % 100 >= 60) {
+            alert('err');
+        }
+        else {
+            $.post('#', {
+                    time: _time,
+                    temp: _temp
+                }, function(data) {
+                    if (data == 'ok') {
+                        alert('scheduled successfully');
+                    }
+                    else {
+                        alert(data);
+                    }
+                }
+            );
+        }
     });
 });

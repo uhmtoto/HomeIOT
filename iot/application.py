@@ -2,7 +2,8 @@ from iot import app
 from iot.db import *
 from flask import (
     Flask, 
-    render_template
+    render_template,
+    request
 )
 import requests, os
 
@@ -12,7 +13,6 @@ room_list = ['living', 'living1', 'living2', 'hallway', 'kitchen', 'bed', 'seohu
 base_ip = 'http://59.14.175.46'
 control_url = base_ip + '/sm/control.php'
 sess_id = {'PHPSESSID': 'a82fe3pbuqgchva1ujv3m5b2q4'}
-schedule_path = './schedule/'
 
 @app.route('/')
 def main():
@@ -64,28 +64,22 @@ def control(device=None, room=None, act=None):
     except:
         return 'err'
 
-@app.route('/schedule/<room>/')
+@app.route('/schedule/<room>', methods=['GET', 'POST'])
 def schedule_form(room=None):
-    return render_template('schedule.html', room=room, room_list=room_list)
-
-@app.route('/schedule/<room>/<time>/<io>/<temp>')
-def schedule_set(time=None, room=None, io=None, temp=None):
-    i_time = int(time)
-    i_temp = int(temp)
-    if (i_time / 100 < 0 or i_time / 100 > 24 or i_time % 100 < 0 or i_time % 100 > 60):
-        return 'check time'
-    if (io != 'i' and io != 'o'):
-        return 'check on/off'
-    if (i_temp < 5 or i_temp > 40):
-        return 'check temperature'
-    time = time[:2] + ':' + time[2:]
-    f = open(schedule_path+room+'.data', 'w')
-    f.write(io+'\n'+time+'\n'+temp+'\n')
-    f.close()
+    if request.method == 'GET':
+        return render_template('schedule.html', room=room, room_list=room_list)
+    _time = int(request.form.get('time'))
+    _room = room
+    _temp = int(request.form.get('temp'))
+    newSc = Schedule(
+        time=_time,
+        room=_room,
+        temp=_temp
+    )
+    db.session.add(newSc)
+    db.session.commit()
     return 'ok'
 
 @app.route('/schedule/<room>/del')
 def schdeule_del(room=None):
-    f = open(schedule_path+room+'.data', 'w')
-    f.close()
-    return 'ok'
+    pass
