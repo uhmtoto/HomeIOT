@@ -1,5 +1,9 @@
-from flask import Flask, render_template
 from iot import app
+from iot.db import *
+from flask import (
+    Flask, 
+    render_template
+)
 import requests, os
 
 device_list = ['light', 'gas', 'heating', 'ventilation']
