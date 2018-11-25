@@ -12,7 +12,7 @@ $(document).ready(function() {
     $(".temp-set").click(function() {
         var usr_temp = $("#temp").val()
         if (usr_temp < 5 || usr_temp > 40) {
-            alert('over limit\n5 ~ 40 (째C)');
+            alert('over limit\n5 ~ 40 (°CC)');
             exit();
         }
         $.get($("#temp").val(), function(data, status){

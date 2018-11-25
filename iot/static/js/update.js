@@ -82,9 +82,9 @@ function heating_update() {
         var nowtemp = tmp[0] * 10 + tmp[1];
         var settemp = tmp[2] * 10 + tmp[3];
         
-        $("#now_data").text('now ' + nowtemp + '째C');
+        $("#now_data").text('now ' + nowtemp + '°CC');
         if (flag == 1) {
-            $("#now_data").text($("#now_data").text() + ', set ' + settemp + '째C');
+            $("#now_data").text($("#now_data").text() + ', set ' + settemp + '°CC');
         }
     });
 }
