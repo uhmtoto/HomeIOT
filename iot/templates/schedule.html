@@ -1,14 +1,4 @@
-<!doctype html>
-<html lang="kr">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>HomeIOT</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://kr.objectstorage.ncloud.com/uhmtoto-homemanager/main.css">
-</head>
-
+{% include 'head.html' %}
 <body>
     <div class="container">
         <div class="jumbotron mt-3">
@@ -16,11 +6,6 @@
             <h1>Not Found</h1>
             {% else %}
             <h1>Schedule {{ room }}</h1>
-            <style>
-                .sc-group:nth-child(2n) {
-                    margin: 0 10px 0 10px;
-                }
-            </style>
             <div class="btn-toolbar">                    
                 <div class="input-group">
                     <div class="input-group sc-group mb-3">
@@ -44,46 +29,8 @@
 			{% endif %}
         </div>
     </div>
-    
     {% include 'navbar.html' %}
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function() {
-            $("#btn-on").click(function() {
-                $("#s_temp").attr("disabled", false);
-                $("#btn-on").attr("disabled", true);
-                $("#btn-off").attr("disabled", false);
-            });
-            $("#btn-off").click(function() {
-                $("#s_temp").attr("disabled", true);
-                $("#btn-on").attr("disabled", false);
-                $("#btn-off").attr("disabled", true);
-            });
-
-            $("#set").click(function() {
-                var time = $("#s_time").val();
-                var io = $("#btn-on").attr("disabled") ? 'i' : 'o';
-                var temp = $("#s_temp").val();
-                if (io == 'o') {
-                    temp = '5';
-                }
-                $.get('./'+time+'/'+io+'/'+temp, function(data, status) {
-                    if (data == 'ok') {
-                        alert('scheduled successfully');
-                    }
-                    else {
-                        alert(data);
-                    }
-                });
-            });
-        });
-    </script>
+    {% include 'js.html' %}
+    <script src="{{ url_for('static', filename='./js/schedule.js') }}"></script>
 </body>
-
 </html>
