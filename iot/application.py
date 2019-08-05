@@ -12,7 +12,7 @@ room_list = ['living', 'living1', 'living2', 'hallway', 'kitchen', 'bed', 'seohu
 
 base_ip = 'http://59.14.175.46'
 control_url = base_ip + '/sm/control.php'
-sess_id = {'PHPSESSID': 'a82fe3pbuqgchva1ujv3m5b2q4'}
+sess_id = {'PHPSESSID': 'c60ip0vanmloekie55rlk0iti3'}
 
 @app.route('/')
 def main():
